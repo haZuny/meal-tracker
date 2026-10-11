@@ -50,6 +50,7 @@ android {
             if (hasReleaseSigning) {
                 signingConfig = signingConfigs.getByName("release")
             }
+            proguardFiles("proguard-rules.pro")
             optimization {
                 enable = true
                 // 부분 최적화에서 Kotlin 상속 클래스의 패키지가 갈라져 시작 오류가 발생했다.
