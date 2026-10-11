@@ -38,6 +38,9 @@ jobs:
           :app:assembleDebug :app:assembleRelease :app:bundleRelease
           --no-daemon --no-configuration-cache --stacktrace
 
+      - name: R8 Release OCR 클래스 보존 검증
+        run: python3 .github/scripts/release_r8.py
+
       - name: 검증 보고서 보관
         if: always()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
