@@ -30,7 +30,7 @@
     <string name="goal_invalid">두 목표 모두 0보다 큰 숫자로 입력해 주세요.</string>
     <string name="goal_saved">목표를 저장했어요.</string>
     <string name="my_foods">내 음식</string>
-    <string name="my_foods_description">반복해서 먹는 음식을 선택할 때 사용해요.</string>
+    <string name="my_foods_description">반복해서 먹는 음식을 선택할 때 사용해요.</string><string name="manage_foods">음식 관리</string>
     <string name="add_food">음식 등록</string>
     <string name="no_foods">등록한 음식이 아직 없어요. 바로 기록에는 음식 등록이 필요하지 않아요.</string>
     <string name="template_nutrition">1 %1$s당 %2$s kcal · 단백질 %3$sg</string>

@@ -27,9 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
@@ -44,7 +41,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.hazuny.noshnote.MealViewModel
 import com.hazuny.noshnote.R
-import java.time.LocalDate
 
 private data class MainDestination(
     val route: String,
@@ -89,7 +85,7 @@ fun NoshNoteApp(viewModel: MealViewModel) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = backStackEntry?.destination?.route ?: "home"
-    var selectedDateKey by rememberSaveable { mutableStateOf(LocalDate.now().toString()) }
+    val selectedDateKey by viewModel.selectedDateKey.collectAsStateWithLifecycle()
     val entries by viewModel.entries.collectAsStateWithLifecycle()
     val foodTemplates by viewModel.foodTemplates.collectAsStateWithLifecycle()
     val goal by viewModel.goal.collectAsStateWithLifecycle()
@@ -202,7 +198,7 @@ fun NoshNoteApp(viewModel: MealViewModel) {
                     foodTemplates = foodTemplates,
                     goalCalories = goal?.caloriesKcal,
                     goalProtein = goal?.proteinG,
-                    onDateChange = { selectedDateKey = it },
+                    onDateChange = viewModel::selectDate,
                     onOpenSettings = { navController.navigate("settings") },
                 )
             }
@@ -212,7 +208,7 @@ fun NoshNoteApp(viewModel: MealViewModel) {
                     goalCalories = goal?.caloriesKcal,
                     goalProtein = goal?.proteinG,
                     onSelectDate = { dateKey ->
-                        selectedDateKey = dateKey
+                        viewModel.selectDate(dateKey)
                         navController.navigate("home") {
                             popUpTo(navController.graph.findStartDestination().id) { saveState = true }
                             launchSingleTop = true
