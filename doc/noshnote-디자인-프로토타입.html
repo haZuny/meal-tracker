@@ -194,8 +194,8 @@
         </div>
       </div>
       <div class="settings-group card">
-        <div class="section-head" style="margin:0 0 8px"><h2>내 음식</h2><button class="primary" id="new-food" style="min-height:36px;padding:0 11px;font-size:12px">음식 등록</button></div>
-        <div id="food-list"></div>
+        <div class="section-head" style="margin:0 0 8px"><h2>내 음식</h2><button class="primary" id="manage-foods" style="min-height:36px;padding:0 11px;font-size:12px">음식 관리</button></div>
+        <p class="subtle">반복해서 먹는 음식을 저장해 두고 기록할 때 다시 사용할 수 있어요.</p>
       </div>
     </section>
     </div>
@@ -340,7 +340,12 @@
       function renderSettings() {
         document.getElementById('goal-kcal').value = state.goals.kcal;
         document.getElementById('goal-protein').value = state.goals.protein;
-        document.getElementById('food-list').innerHTML = state.foods.length ? state.foods.map(food => `<div class="food-manage"><div><strong>${escapeHtml(food.name)}</strong><div class="subtle">1 ${escapeHtml(food.unit)}당 ${fmt(food.kcal,0)} kcal · ${fmt(food.protein)}g</div></div><button class="secondary" data-edit-food="${food.id}" style="min-height:34px;padding:0 10px;font-size:12px">수정</button></div>`).join('') : `<p class="empty">등록한 음식이 아직 없어요. 자주 먹는 음식부터 추가해 보세요.</p>`;
+      }
+      function openFoodManager() {
+        const foods = state.foods.length ? state.foods.map(food => `<div class="food-manage"><div><strong>${escapeHtml(food.name)}</strong><div class="subtle">1 ${escapeHtml(food.unit)}당 ${fmt(food.kcal,0)} kcal · ${fmt(food.protein)}g</div></div><button class="secondary" data-edit-food="${food.id}" style="min-height:34px;padding:0 10px;font-size:12px">수정</button></div>`).join('') : `<p class="empty">등록한 음식이 아직 없어요. 자주 먹는 음식부터 추가해 보세요.</p>`;
+        openModal(`<div class="sheet-head"><h2 id="modal-title">내 음식</h2><button class="icon-btn" data-close aria-label="닫기">×</button></div><div class="sheet-actions" style="margin-top:0"><button class="primary" id="new-food">음식 등록</button></div><div>${foods}</div>`);
+        document.getElementById('new-food').onclick = () => openFoodForm();
+        document.querySelectorAll('[data-close]').forEach(button => button.onclick = closeModal);
         document.querySelectorAll('[data-edit-food]').forEach(button => button.addEventListener('click', () => openFoodForm(button.dataset.editFood)));
       }
       function showScreen(id) {
@@ -547,7 +552,7 @@
       };
       document.getElementById('quick-add').onclick = () => openDirectForm();
       document.getElementById('use-saved-food').onclick = () => openFoodPicker();
-      document.getElementById('new-food').onclick = () => openFoodForm();
+      document.getElementById('manage-foods').onclick = () => openFoodManager();
       document.getElementById('backup-export').onclick = exportBackup;
       document.getElementById('backup-import').onclick = () => {
         const input = document.createElement('input'); input.type = 'file'; input.accept = 'application/json,.json';

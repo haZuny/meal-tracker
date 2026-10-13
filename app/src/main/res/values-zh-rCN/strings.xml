@@ -8,7 +8,7 @@
     <string name="entry_detail">%1$s %2$s · 蛋白质 %3$sg</string>
     <string name="meal_breakfast">早餐</string><string name="meal_lunch">午餐</string><string name="meal_dinner">晚餐</string><string name="meal_snack">加餐</string><string name="tag_none">无标签</string>
     <string name="calories_protein_unit">热量 (kcal)</string><string name="protein_unit">蛋白质 (g)</string><string name="daily_goal">每日目标</string><string name="save_goal">保存目标</string>
-    <string name="goal_invalid">两个目标都请输入大于 0 的数字。</string><string name="goal_saved">目标已保存。</string><string name="my_foods">我的食物</string><string name="my_foods_description">保存常吃的食物，方便下次记录。</string>
+    <string name="goal_invalid">两个目标都请输入大于 0 的数字。</string><string name="goal_saved">目标已保存。</string><string name="my_foods">我的食物</string><string name="my_foods_description">保存常吃的食物，方便下次记录。</string><string name="manage_foods">管理食物</string>
     <string name="add_food">添加食物</string><string name="no_foods">还没有保存的食物。无需保存也可以直接记录。</string><string name="template_nutrition">每 %1$s：%2$s kcal · 蛋白质 %3$sg</string>
     <string name="edit">编辑</string><string name="delete_food_title">删除此食物？</string><string name="delete_food_message">只删除 %1$s 模板，已有饮食记录会保留。</string><string name="delete">删除</string><string name="cancel">取消</string><string name="save">保存</string>
     <string name="food_name">食物名称</string><string name="food_quantity">本次食用量</string><string name="unit">单位</string><string name="unit_label">单位</string>

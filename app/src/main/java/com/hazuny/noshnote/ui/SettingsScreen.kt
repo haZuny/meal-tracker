@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.lazy.LazyColumn
@@ -22,6 +23,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -32,6 +34,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -61,6 +65,7 @@ fun SettingsScreen(
     var message by remember { mutableStateOf<Int?>(null) }
     var editingTemplate by remember { mutableStateOf<FoodTemplateEntity?>(null) }
     var creatingTemplate by remember { mutableStateOf(false) }
+    var showingFoods by remember { mutableStateOf(false) }
     var deletingTemplate by remember { mutableStateOf<FoodTemplateEntity?>(null) }
     var pendingImport by remember { mutableStateOf<MealBackupData?>(null) }
     var backupMessage by remember { mutableStateOf<Int?>(null) }
@@ -186,49 +191,93 @@ fun SettingsScreen(
             }
         }
         item {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
-                    AutoFitText(uiText(R.string.my_foods), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    Text(uiText(R.string.my_foods_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-                OutlinedButton(onClick = { creatingTemplate = true }) { AutoFitText(uiText(R.string.add_food), maxLines = 1) }
-            }
-        }
-        if (foodTemplates.isEmpty()) {
-            item {
-                Card(
-                    shape = MaterialTheme.shapes.medium,
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            Card(
+                shape = MaterialTheme.shapes.medium,
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            ) {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(NoshNoteSpacing.cardPadding),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
                 ) {
-                    Text(uiText(R.string.no_foods), modifier = Modifier.padding(NoshNoteSpacing.cardPadding), color = MaterialTheme.colorScheme.onSurfaceVariant)
-                }
-            }
-        } else {
-            items(foodTemplates, key = { it.id }) { template ->
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = MaterialTheme.shapes.medium,
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
-                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(horizontal = 15.dp, vertical = 12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(10.dp),
-                    ) {
-                        Column(Modifier.weight(1f)) {
-                            AutoFitText(template.name, fontWeight = FontWeight.SemiBold)
-                            AutoFitText(uiText(R.string.template_nutrition, template.unit, formatAmount(template.caloriesPerUnitKcal), formatAmount(template.proteinPerUnitG)), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
-                        }
-                        TextButton(onClick = { editingTemplate = template }) { AutoFitText(uiText(R.string.edit), maxLines = 1) }
+                    Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        AutoFitText(uiText(R.string.my_foods), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        Text(uiText(R.string.my_foods_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
+                    OutlinedButton(onClick = { showingFoods = true }) { AutoFitText(uiText(R.string.manage_foods), maxLines = 1) }
                 }
             }
         }
         item { Spacer(Modifier.height(5.dp)) }
+    }
+
+    if (showingFoods) {
+        Dialog(
+            onDismissRequest = { showingFoods = false },
+            properties = DialogProperties(usePlatformDefaultWidth = false),
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth().fillMaxHeight(0.92f).padding(horizontal = 16.dp),
+                shape = MaterialTheme.shapes.large,
+                color = MaterialTheme.colorScheme.surface,
+                tonalElevation = 6.dp,
+            ) {
+                Column(Modifier.fillMaxSize().padding(NoshNoteSpacing.cardPadding)) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        AutoFitText(
+                            uiText(R.string.my_foods),
+                            modifier = Modifier.weight(1f),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                        )
+                        TextButton(onClick = { creatingTemplate = true }) { AutoFitText(uiText(R.string.add_food), maxLines = 1) }
+                        TextButton(onClick = { showingFoods = false }) { AutoFitText(uiText(R.string.close), maxLines = 1) }
+                    }
+                    Spacer(Modifier.height(8.dp))
+                    if (foodTemplates.isEmpty()) {
+                        Card(
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = MaterialTheme.shapes.medium,
+                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+                            border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                        ) {
+                            Text(uiText(R.string.no_foods), modifier = Modifier.padding(NoshNoteSpacing.cardPadding), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        }
+                    } else {
+                        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                            items(foodTemplates, key = { it.id }) { template ->
+                                Card(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    shape = MaterialTheme.shapes.medium,
+                                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
+                                    border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+                                ) {
+                                    Row(
+                                        modifier = Modifier.fillMaxWidth().padding(horizontal = 15.dp, vertical = 12.dp),
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        horizontalArrangement = Arrangement.spacedBy(10.dp),
+                                    ) {
+                                        Column(Modifier.weight(1f)) {
+                                            AutoFitText(template.name, fontWeight = FontWeight.SemiBold)
+                                            AutoFitText(uiText(R.string.template_nutrition, template.unit, formatAmount(template.caloriesPerUnitKcal), formatAmount(template.proteinPerUnitG)), color = MaterialTheme.colorScheme.onSurfaceVariant, style = MaterialTheme.typography.bodySmall)
+                                        }
+                                        TextButton(onClick = { editingTemplate = template }) { AutoFitText(uiText(R.string.edit), maxLines = 1) }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     if (creatingTemplate || editingTemplate != null) {

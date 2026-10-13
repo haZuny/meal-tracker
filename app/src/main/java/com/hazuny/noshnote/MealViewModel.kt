@@ -9,11 +9,19 @@ import com.hazuny.noshnote.data.MealBackupData
 import com.hazuny.noshnote.data.MealRepository
 import java.time.LocalDate
 import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class MealViewModel(private val repository: MealRepository) : ViewModel() {
+    private val _selectedDateKey = MutableStateFlow(LocalDate.now().toString())
+    val selectedDateKey: StateFlow<String> = _selectedDateKey
+
+    fun selectDate(dateKey: String) {
+        _selectedDateKey.value = dateKey
+    }
+
     val entries: StateFlow<List<MealEntryEntity>> = repository.entries.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5_000),
