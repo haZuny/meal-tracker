@@ -51,6 +51,8 @@
 
 버전 변경, 태그 발행, Secrets 설정 및 Play 준비 절차는 [배포 및 CI/CD 안내](doc/noshnote-배포-CICD.md)를 참고하세요.
 
+Play Console 스토어 문안, 데이터 안전성·건강 앱 선언 초안, 개인정보처리방침 초안과 출시 전 체크리스트는 [Play 스토어 출시 준비 자료](doc/play-store-launch.md)를 참고하세요.
+
 ## 저장소 구조
 
 ```text
