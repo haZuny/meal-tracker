@@ -77,14 +77,14 @@ Base64는 파일의 텍스트 표현이며 암호화가 아니다. 이 명령은
 1. 작업 브랜치에서 변경하고 로컬에서 필요한 검증을 수행한다.
 2. 브랜치를 푸시하고 `main` 대상 PR을 만든다. CI의 `Android 검증` 결과와 변경 내용을 확인한다.
 3. PR을 병합하고 `main` CI 결과를 확인한다.
-4. `app/build.gradle.kts`의 `versionName`과 `versionCode`를 정리한다. 버전 변경도 PR로 병합한다. 현재 값은 `1.0.1`과 `2`다. 이후 배포마다 `versionCode`를 증가시킨다.
+4. `app/build.gradle.kts`의 `versionName`과 `versionCode`를 정리한다. 버전 변경도 PR로 병합한다. 다음 배포 기준 값은 `1.0.2`와 `3`이다. 이후 배포마다 `versionCode`를 증가시킨다.
 5. 검증된 `main` 커밋에 버전과 일치하는 태그를 만들어 푸시한다.
 
 ```bash
 git switch main
 git pull --ff-only origin main
-git tag -a v1.0.1 -m "NoshNote 1.0.1 배포"
-git push origin v1.0.1
+git tag -a v1.0.2 -m "NoshNote 1.0.2 배포"
+git push origin v1.0.2
 ```
 
 6. Actions의 Android Release 실행 결과와 Releases의 초안을 확인한다.
