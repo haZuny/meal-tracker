@@ -1,4 +1,5 @@
 <resources>
+    <string name="privacy_policy">Политика конфиденциальности</string>
     <string name="app_name">NoshNote</string><string name="nav_home">Главная</string><string name="nav_calendar">Календарь</string><string name="nav_settings">Настройки</string>
     <string name="title_home">Питание</string><string name="today">Сегодня</string><string name="record">Записи</string><string name="item_count">%1$d</string><string name="quick_record">＋ Быстро</string><string name="load_food">≡ Сохранённое</string>
     <string name="no_records_yet">Записей пока нет</string><string name="quick_record_no_template">Можно записать еду, не сохраняя её заранее.</string><string name="today_intake">Потребление за день</string><string name="calories">Калории</string><string name="protein">Белок</string><string name="goal_not_set">Цель не задана</string><string name="goal_reached">Цель достигнута</string><string name="amount_remaining">Осталось %1$s %2$s</string><string name="entry_detail">%1$s %2$s · Белок %3$sg</string>

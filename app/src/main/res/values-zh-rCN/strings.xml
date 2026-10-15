@@ -1,4 +1,5 @@
 <resources>
+    <string name="privacy_policy">隐私政策</string>
     <string name="app_name">NoshNote</string>
     <string name="nav_home">主页</string><string name="nav_calendar">日历</string><string name="nav_settings">设置</string>
     <string name="title_home">饮食记录</string><string name="today">今天</string>

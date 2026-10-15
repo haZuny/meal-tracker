@@ -1,4 +1,5 @@
 <resources>
+    <string name="privacy_policy">Politique de confidentialité</string>
     <string name="app_name">NoshNote</string><string name="nav_home">Accueil</string><string name="nav_calendar">Calendrier</string><string name="nav_settings">Paramètres</string>
     <string name="title_home">Journal alimentaire</string><string name="today">Aujourd’hui</string><string name="record">Repas</string><string name="item_count">%1$d</string><string name="quick_record">＋ Saisie rapide</string><string name="load_food">≡ Mes aliments</string>
     <string name="no_records_yet">Aucun repas pour le moment</string><string name="quick_record_no_template">Vous pouvez noter un repas sans enregistrer l’aliment.</string><string name="today_intake">Apports du jour</string><string name="calories">Calories</string><string name="protein">Protéines</string><string name="goal_not_set">Objectif non défini</string><string name="goal_reached">Objectif atteint</string><string name="amount_remaining">Encore %1$s %2$s</string><string name="entry_detail">%1$s %2$s · Protéines %3$sg</string>
