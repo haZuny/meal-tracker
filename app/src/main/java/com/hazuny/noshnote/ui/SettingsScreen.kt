@@ -1,5 +1,7 @@
 package com.hazuny.noshnote.ui
 
+import android.content.Intent
+import android.net.Uri
 import com.hazuny.noshnote.R
 
 import androidx.compose.foundation.layout.Arrangement
@@ -207,6 +209,28 @@ fun SettingsScreen(
                         Text(uiText(R.string.my_foods_description), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     OutlinedButton(onClick = { showingFoods = true }) { AutoFitText(uiText(R.string.manage_foods), maxLines = 1) }
+                }
+            }
+        }
+        item {
+            Card(
+                shape = MaterialTheme.shapes.medium,
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
+            ) {
+                TextButton(
+                    onClick = {
+                        context.startActivity(
+                            Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse("https://hazuny.github.io/noshnote/privacy-policy.html"),
+                            ),
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth().padding(NoshNoteSpacing.cardPadding),
+                ) {
+                    AutoFitText(uiText(R.string.privacy_policy), maxLines = 1)
                 }
             }
         }

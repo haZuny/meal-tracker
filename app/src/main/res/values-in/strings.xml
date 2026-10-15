@@ -1,4 +1,5 @@
 <resources>
+    <string name="privacy_policy">Kebijakan privasi</string>
     <string name="app_name">NoshNote</string><string name="nav_home">Beranda</string><string name="nav_calendar">Kalender</string><string name="nav_settings">Setelan</string>
     <string name="title_home">Catatan makan</string><string name="today">Hari ini</string><string name="record">Catatan</string><string name="item_count">%1$d</string><string name="quick_record">＋ Catat</string><string name="load_food">≡ Tersimpan</string>
     <string name="no_records_yet">Belum ada catatan</string><string name="quick_record_no_template">Anda bisa mencatat makanan tanpa menyimpannya terlebih dahulu.</string><string name="today_intake">Asupan hari ini</string><string name="calories">Kalori</string><string name="protein">Protein</string><string name="goal_not_set">Target belum diatur</string><string name="goal_reached">Target tercapai</string><string name="amount_remaining">Sisa %1$s %2$s</string><string name="entry_detail">%1$s %2$s · Protein %3$sg</string>

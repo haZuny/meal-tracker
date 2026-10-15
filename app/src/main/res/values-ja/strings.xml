@@ -1,4 +1,5 @@
 <resources>
+    <string name="privacy_policy">プライバシーポリシー</string>
     <string name="app_name">NoshNote</string>
     <string name="nav_home">ホーム</string><string name="nav_calendar">カレンダー</string><string name="nav_settings">設定</string>
     <string name="title_home">食事記録</string><string name="today">今日</string><string name="record">記録</string><string name="item_count">%1$d件</string><string name="quick_record">＋ 記録する</string><string name="load_food">≡ 保存済み</string>
