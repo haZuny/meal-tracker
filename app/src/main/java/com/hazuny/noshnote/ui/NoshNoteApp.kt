@@ -39,6 +39,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.hazuny.noshnote.BuildConfig
 import com.hazuny.noshnote.MealViewModel
 import com.hazuny.noshnote.R
 
@@ -128,6 +129,14 @@ fun NoshNoteApp(viewModel: MealViewModel) {
                     }
                 },
                 title = { AutoFitText(title, maxLines = 1, fontWeight = FontWeight.Bold) },
+                actions = {
+                    Text(
+                        text = "v${BuildConfig.VERSION_NAME}",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        modifier = Modifier.padding(end = 16.dp),
+                    )
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background,
                     titleContentColor = MaterialTheme.colorScheme.onSurface,
